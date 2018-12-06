@@ -5,7 +5,7 @@ from mcpi import block
 from time import sleep
 
 def init():
-    mc = Minecraft.create("127.0.0.1", 4711)
+    mc = Minecraft.create("10.183.3.30", 4711)
     x, y, z = mc.player.getPos()	
     return mc
 
@@ -36,10 +36,17 @@ def layer (mc, x, y, z, s ,e,w, m):
 	mc.setBlocks(x-w,y,z+s,x+w,y,z+e-1,m)
 
 def minaret(mc, x, y, z):
-	mx = x -2 ; my = y; mz = z 
+	mx = x -4 ; my = y; mz = z 
 	#for i in range (0,12):
 	mc.setBlocks(newx,newy,newz,newx+2,newy+12,newz+2,24)
 	#mc.setBlock(newx,newy,newz,21)
+
+def fence(mc, x, y, z):
+	fx = x -7 ; fy = y; fz = z+6
+	for i in range (0,15):
+		mc.setBlock(fx,fy,fz,85)
+		fz += 1
+	
 	
 def mosque(mc, x,y,z):
 	newx = x -3 ; newy = y - 1; newz = z + 6
@@ -158,7 +165,8 @@ def main():
 	print("position ",x,y,z)
 	clear_with_air_up(mc, x, y, z, 14,14,14)
 	mosque(mc, x,y,z)
-	if mc.getBlock(x-10,y,z+10) == 0 | 9 :
+	fence(mc, x,y,z)
+	if mc.getBlock(x-10,y,z+10) == 0:
 		mc.setBlock(x-10,y-1,z+10,1)
 	mc.player.setPos(x-10, y, z + 10)
 	
